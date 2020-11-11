@@ -75,7 +75,6 @@ namespace ChessTournament.Models
                 {
                     //Console.WriteLine($"Player {p0.Name} plays move x against Player {this._players[1].Name}");
                     //p0 = this._players[1];
-                    //PlayerMove pm1 = (pTemp) => Console.WriteLine($"Player {p0.Name} plays move x against Player {this._players[1].Name}");
                     pm1(p0,1);
                     p0 = this._players[1];
 
