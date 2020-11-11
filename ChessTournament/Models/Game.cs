@@ -62,28 +62,36 @@ namespace ChessTournament.Models
             PlayerMoves(this._players[0], c);
         }
 
-        public delegate void PlayerMove(Player p,int j);
+        public delegate void PlayerMove(Player p, int j);
         private void PlayerMoves(Player p, Clock c)
         {
-            Player p0 = p;            
-            PlayerMove pm1 = (pTemp,j) => Console.WriteLine($"Player {p0.Name} plays move x against Player {this._players[j].Name}");
+            Player p0 = p;
+            //PlayerMove playerMovePrint = (pTemp,j) => Console.WriteLine($"Player {p0.Name} plays move x against Player {this._players[j].Name}");
+
+            PlayerMove playerMovePrint = (pTemp, j) =>
+            {
+                Console.WriteLine($"Player {p0.Name} plays move x against Player {this._players[j].Name}");
+                p0 = this._players[j];
+            };
+
             // loop that counts till TotalTime is reached or expired
-         
+
             for (int i = c.TotalTime; i > 0; i = i - c.TickStep)
             {
                 if(p0 == this._players[0])
                 {
                     //Console.WriteLine($"Player {p0.Name} plays move x against Player {this._players[1].Name}");
                     //p0 = this._players[1];
-                    pm1(p0,1);
-                    p0 = this._players[1];
+                    playerMovePrint(p0,1);
+                    
 
                 }
                 else
                 {
                     //Console.WriteLine($"Player {p0.Name} plays move x against Player {this._players[0].Name}");
-                    pm1(p0,0);
-                    p0 = this._players[0];
+                    //p0 = this._players[0];
+                    playerMovePrint(p0,0);
+                   
                 }
                 Console.WriteLine($"Remaining Time: {c.Tick()}"); 
             }
